@@ -1,7 +1,7 @@
 # CPL
 Calmira PLatform - минимальный набор скомпилированного программного обеспечения для сборки дистрибутива CalmiraLinux. Это *не* загрузочные образы системы.
 
-![Лого](design/calmira_logo_transparent_black.md)
+![Лого](design/calmira_logo_transparent_black.png)
 
 ## Структура
 Монолитная. Представляет единый архив с нужными ПО и файлами.
