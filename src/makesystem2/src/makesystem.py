@@ -20,7 +20,7 @@ BuildInstructions = "/usr/src/packages/" # Files with build instructions
 LogDir = "/var/log/system_building/packages"
 LogFile = "/var/log/system_building/system_building.log"
 
-default_message = "Continue?"
+default_message = "Continue? (y/n) "
 
 ## Base functions ##
 # Заголовок
@@ -30,6 +30,7 @@ def header_msg(message):
 # Отправка сообщений в лог
 def log_msg(message):   
     f = open(LogFile, 'a')
+    message = message + "\n"
     for index in message:
         f.write(index)
     f.write('\n')
@@ -37,7 +38,7 @@ def log_msg(message):
 
 # Диалог с пользователем
 def dialog_msg(message=default_message, return_code=0):
-    print(message)
+    print(message, end="")
     run = input()
     
     if run == "y" or run == "Y":
@@ -82,6 +83,7 @@ with open(JSON_FILE) as f:
     fileData = json.load(f)
 
 # Проверка на существование файлов
+errorPkgs = 0
 for File in fileData["files"]:
     PackageFile = BuildInstructions + File
 
@@ -90,6 +92,11 @@ for File in fileData["files"]:
         print("\033[32mok\033[0m")
     else:
         print("\033[31mFAIL\033[0m")
+        errorPkgs += 1
+
+if errorPkgs > 0:
+    print("No {} build scripts found!".format(errorPkgs))
+    sys.exit(1)
     
 """
 Building a system.
@@ -109,14 +116,14 @@ Inits:
 - systemd.
 """
 def build_package(mode, init="sysvinit"):
-    if mode = "system":
+    if mode == "system":
         build_files = fileData["packages"]
         
     elif mode == "init":
-        if init = "sysvinit":
+        if init == "sysvinit":
             build_files = fileData["systemv-packages"]
             
-        elif init = "systemd":
+        elif init == "systemd":
             build_files = fileData["systemd-packages"]
             
         else:
@@ -129,7 +136,7 @@ def build_package(mode, init="sysvinit"):
     for file in build_files:
         print("\033[35mBuilding package\033[0m {}...".format(file))
         
-        PackageFile = BuildInstructions + File
+        PackageFile = BuildInstructions + file + "2>&1 | tee " + LogDir + "/" + file
         log_message = "Build package " + file
         
         log_msg(log_message)
@@ -137,15 +144,16 @@ def build_package(mode, init="sysvinit"):
         result = subprocess.run(PackageFile, shell = True)
         if result.returncode == 0:
             print("\033[1mPackage {} returned 0, which means the build is probally seccessful.".format(file))
-        elif result.returncode == 1:
-            print("\033[1mPackage {} returned 1, which means the assembly is probably WRONG!".format(file))
-            dialog_msg(return_code=1)
         else:
-            print("Uknown error while building package {}!".format(file))
-            dialog_msg()
+            print("\033[1mPackage {0} returned {1}, which means the assembly is probably WRONG!".format(file, result.returncode))
+            dialog_msg(return_code=1)
 
 # Building base system
 build_package("system")
 
 # Building system init
 build_package("init", init = sys.argv[1])
+
+print("************************************")
+print("**** Base system build complete ****")
+print("************************************")
