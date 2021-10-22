@@ -1,0 +1,141 @@
+{
+    "packages": {
+        "acl": {
+            "multilib": true,
+            "cldirs": true,
+            "build_sequence": [
+                "configure",
+                "build",
+                "install"
+            ],
+            "cldirs_build_sequence": [
+                "cds_configure",
+                "build",
+                "install",
+                "cldirs"
+            ],
+            "miltilib_build_sequence": [
+                "multi_prepare",
+                "multi_configure",
+                "multi_build",
+                "multi_install"
+            ]
+        },
+        "attr": {
+            "multilib": true,
+            "cldirs": true,
+            "build_sequence": [
+                "configure",
+                "build",
+                "install"
+            ],
+            "cldirs_build_sequence": [
+                "cds_configure",
+                "build",
+                "install",
+                "cldirs"
+            ],
+            "multilib_build_sequence": [
+                "multi_prepare",
+                "multi_configure",
+                "multi_build",
+                "multi_install"
+            ]
+        },
+        "autoconf": {
+            "multilib": false,
+            "cldirs": false,
+            "build_sequence": [
+                "configure",
+                "build",
+                "install"
+            ]
+        },
+        "automake": {
+            "multilib": false,
+            "cldirs": false,
+            "build_sequence": [
+                "prepare",
+                "configure",
+                "build",
+                "install"
+            ]
+        },
+        "bash": {
+            "multilib": false,
+            "cldirs": true,
+            "build_sequence": [
+                "prepare",
+                "configure",
+                "build",
+                "install"
+            ],
+            "cldirs_build_sequence": [
+                "prepare",
+                "configure",
+                "build",
+                "install",
+                "cldirs"
+            ]
+        },
+        "bc": {
+            "multilib": false,
+            "cldirs": false,
+            "build_sequence": [
+                "configure",
+                "build",
+                "install"
+            ]
+        },
+        "binutils": {
+            "multilib": true,
+            "cldirs": false,
+            "build_sequence": [
+                "prepare",
+                "configure",
+                "build",
+                "install",
+                "postinstall"
+            ],
+            "multilib_build_sequence": [
+                "prepare",
+                "multi_configure",
+                "multi_build",
+                "multi_install",
+                "multi_postinstall"
+            ]
+        },
+        "bison": {
+            "multilib": false,
+            "cldirs": false,
+            "build_sequence": [
+                "configure",
+                "build",
+                "install"
+            ]
+        },
+        "bzip2": {
+            "multilib": true,
+            "cldirs": true,
+            "build_sequence": [
+                "patch",
+                "prepare",
+                "build",
+                "install",
+                "postinstall"
+            ],
+            "cldirs_build_sequence": [
+                "patch",
+                "prepare",
+                "build",
+                "install",
+                "cldirs"
+            ],
+            "multilib_build_sequence": [
+                "multi_prepare",
+                "multi_build",
+                "multi_install"
+            ]
+        }
+    }
+}
