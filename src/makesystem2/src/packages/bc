@@ -1,16 +1,12 @@
 #!/bin/bash
 
 NAME="bc"
-VERSION="4.0.2"
+VERSION="5.1.1"
 
-{ time \
-	{
-		tar -xf $NAME-$VERSION.tar.xz
-		cd $NAME-$VERSION
+tar -xf "$NAME-$VERSION.tar.xz"
+cd $NAME-$VERSION
 
-		CC=gcc ./configure --prefix=/usr -G -O3
-		make
+CC=gcc ./configure --prefix=/usr -G -O3
+make
 
-		make install
-	}
-} 2>&1 |tee /var/log/system_building/packages/$NAME.log
+make install

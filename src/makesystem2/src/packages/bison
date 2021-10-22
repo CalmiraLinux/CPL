@@ -1,16 +1,13 @@
 #!/bin/bash
 
 NAME="bison"
+VERSION="3.8.2"
 
-{ time \
-    {
-        tar -xf bison-3.7.6.tar.xz
-        cd bison-3.7.6
+tar -xf "$NAME-$VERSION.tar.xz"
+cd $NAME-$VERSION
 
-        ./configure --prefix=/usr --docdir=/usr/share/doc/bison
+./configure --prefix=/usr --docdir=/usr/share/doc/bison
 
-        make
+make
 
-        make install
-    }
-} 2>&1 |tee /var/log/system_building/packages/$NAME.log
+make install

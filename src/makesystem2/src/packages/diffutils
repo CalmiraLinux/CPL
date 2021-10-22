@@ -1,7 +1,10 @@
 #!/bin/bash
 
-tar -xf diffutils-3.7.tar.xz
-cd diffutils-3.7
+NAME="diffutils"
+VERSION="3.8"
+
+tar -xf "$NAME-$VERSION.tar.xz"
+cd "$NAME-$VERSION"
 
 ./configure --prefix=/usr
 

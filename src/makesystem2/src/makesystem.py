@@ -59,9 +59,12 @@ if GID != 0:
     exit(1)
 
 # Check sys.argv[1]
-if sys.argv[1] != "systemd" or sys.argv[1] != "sysvinit":
-    print("Uknown init {}!".format(sys.argv[1]))
+if sys.argv[1] != "systemd" or sys.argv[1] != "sysvinit" or sys.argv[1] != "cpl":
+    print("Uknown build mode {}!".format(sys.argv[1]))
     exit(1)
+
+if sys.argv[1] == "cpl":
+    cpl_build = True
 
 # Check log dir
 if os.path.isdir(LogDir):
@@ -129,6 +132,10 @@ def build_package(mode, init="sysvinit"):
         else:
             print("Uknown init system {} for building!".format(init))
             exit(1)
+    
+    elif mode == "cpl":
+        build_files = fileData["cpl-system"]
+
     else:
         print("Uknown mode for 'build_package()'!")
         exit(1)
@@ -149,7 +156,10 @@ def build_package(mode, init="sysvinit"):
             dialog_msg(return_code=1)
 
 # Building base system
-build_package("system")
+if cpl_build == True:
+    build_package("cpl")
+else:
+    build_package("system")
 
 # Building system init
 build_package("init", init = sys.argv[1])

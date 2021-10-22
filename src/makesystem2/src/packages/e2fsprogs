@@ -1,11 +1,14 @@
 #!/bin/bash
 
-tar -xf e2fsprogs-1.46.2.tar.gz
-cd e2fsprogs-1.46.2
+NAME="e2fsprogs"
+VERSION="1.46.4"
+
+tar -xf "$NAME-$VERSION.tar.gz"
+cd $NAME-$VERSION
 
 ./configure --prefix=/usr             \
              --sysconfdir=/etc        \
-	     --bindir=/bin            \
+	         --bindir=/bin            \
              --enable-elf-shlibs      \
              --disable-libblkid       \
              --disable-libuuid        \
