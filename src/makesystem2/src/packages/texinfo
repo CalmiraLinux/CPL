@@ -5,6 +5,11 @@ cd texinfo-6.8
 
 ./configure --prefix=/usr
 
+# FIX 07.11.2021
+sed -e 's/__attribute_nonnull__/__nonnull/' \
+    -i gnulib/lib/malloc/dynarray-skeleton.c
+# FIX 07.11.2021
+
 make
 make install
 make TEXMF=/usr/share/texmf install-tex

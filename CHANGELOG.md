@@ -1,5 +1,8 @@
 # ChangeLog
 
+* 07.11.2021 Михаил Краснов <linuxoid85@gmail.com>
+	* Фикс сборки texinfo;
+
 * 20.10.2021 Михаил Краснов <linuxoid85@gmail.com>
 	* Добавление поддержки CPL.
 
